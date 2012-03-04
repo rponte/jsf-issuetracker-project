@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:c="http://java.sun.com/jsp/jstl/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:t="http://myfaces.apache.org/tomahawk"
+    template="/pages/template/template_padrao.xhtml">
+	
+	<ui:define name="conteudo">
+		<div id="container">
+			<h1>Nova Issue</h1>
+			<div align="left">
+				<h:form id="form">
+				
+					<t:saveState value="#{issueBean.issue}" />
+					<t:saveState value="#{issueBean.projetos}" />
+					<t:saveState value="#{issueBean.usuarios}" />
+				
+					<h:outputLabel value="Sumário" for="sumario" />
+					<h:inputText value="#{issueBean.issue.sumario}"
+						required="true" id="sumario" label="Sumário">
+						<f:validateLength minimum="3" />
+					</h:inputText>
+					
+					<h:outputLabel value="Descrição" for="descricao"/>
+					<h:inputTextarea rows="6" value="#{issueBean.issue.descricao}"
+						required="true" id="descricao" label="Descrição"/>
+						
+					<h:outputLabel value="Projeto" for="projeto"/>
+					<h:selectOneMenu value="#{issueBean.issue.projeto}" 
+						id="projeto" label="Projeto"
+						required="true" >
+						<f:selectItem itemLabel="Selecione um projeto" noSelectionOption="true" />
+						<f:selectItems value="#{issueBean.projetos}" var="o"
+   								itemLabel="#{o.nome}" itemValue="#{o}" />
+					</h:selectOneMenu>
+					
+					<h:outputLabel value="Tipo" for="tipo"/>
+					<h:selectOneRadio value="#{issueBean.issue.tipo}" 
+						id="tipo"
+						layout="pageDirection" required="true" label="Tipo">
+						<f:selectItem itemLabel="Bug" itemValue="BUG" />
+						<f:selectItem itemLabel="Feature" itemValue="FEATURE" />
+					</h:selectOneRadio>
+					
+					<h:outputLabel value="Reportado em" for="reportadoEm" />
+					<h:inputText value="#{issueBean.issue.reportadoEm}"
+						required="true" id="reportadoEm" label="Reportado em">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:inputText>
+					
+					<h:outputLabel value="Reportado por" for="reportadoPor" />
+					<h:inputText value="#{issueBean.issue.reportadoPor.nome}"
+						required="true" id="reportadoPor" label="Reportado por" disabled="true">
+					</h:inputText>
+					
+					<h:outputLabel value="Assinado para" for="assinadoPara"/>
+					<h:selectOneMenu value="#{issueBean.issue.assinadoPara}" 
+						id="assinadoPara" label="Assinado para"
+						required="true" >
+						<f:selectItem itemLabel="Selecione um usuário" noSelectionOption="true" />
+						<f:selectItems value="#{issueBean.usuarios}" var="o"
+   								itemLabel="#{o.nome}" itemValue="#{o}" />
+					</h:selectOneMenu>
+					
+					<div align="right">
+						<h:commandLink value="voltar" immediate="true" action="lista" /> &#160;
+						<h:commandButton value="inserir" action="#{issueBean.adiciona}" />
+					</div>
+				</h:form>
+			</div>
+		</div>
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:panelGroup rendered="#{usuarioWeb.logado}" layout="block">
+		<div id="userInfo">
+			<h:form id="logout_form"> 
+			<p>
+				${usuarioWeb.usuario.login} -
+				<h:commandLink value="Sair" action="#{loginBean.sair}"/>
+			</p>
+			</h:form>
+		</div>
+		<div id="menuWrap">
+			<ul id="menuElementsEn">
+				<li><h:link outcome="/home" value="Home"/></li>
+				<li><h:link outcome="/pages/dashboard/dashboard.xhtml" value="Dashboard" /></li>
+				<li><a href="${ctx}/pages/projeto/lista.xhtml"><span>Projetos</span></a></li>
+				<li><a href="${ctx}/pages/usuario/lista.xhtml"><span>Usuarios</span></a></li>
+				<li><a href="${ctx}/pages/issue/lista.xhtml"><span>Issues</span></a></li>
+			</ul><!-- menuElements-->
+		</div><!-- menuWrap-->
+	</h:panelGroup>
+	
+</ui:composition>
