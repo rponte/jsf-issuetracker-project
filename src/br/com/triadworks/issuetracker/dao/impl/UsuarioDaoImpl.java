@@ -3,10 +3,11 @@ package br.com.triadworks.issuetracker.dao.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,21 +48,21 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	@Override
 	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 	public Usuario buscaPor(String login, String senha) {
-		String hql = "from Usuario u where u.login = :login and u.senha = :senha";
-		Query query = entityManager.createQuery(hql)
-						.setParameter("login", login)
-						.setParameter("senha", senha);
-		try {
-			return (Usuario) query.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
+		return (Usuario) createCriteria()
+			.add(Restrictions.eq("login", login))
+			.add(Restrictions.eq("senha", senha))
+			.uniqueResult();
 	}
 
 	@Override
 	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 	public Usuario carrega(Long id) {
 		return entityManager.find(Usuario.class, id);
+	}
+	
+	private Criteria createCriteria() {
+		Session session = ((Session) entityManager.getDelegate());
+		return session.createCriteria(Usuario.class);
 	}
 
 }
