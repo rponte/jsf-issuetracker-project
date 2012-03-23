@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<!-- Um alias para facilitar nossa vida -->
+	<c:set var="ctx" value="#{request.contextPath}" scope="request"/>
+	
+	<h:head>
+       <title>Issue Tracker</title>
+       <h:outputStylesheet library="css" name="app.css" />
+    </h:head>
+	
+	<body>
+	
+		<h:panelGroup rendered="false" layout="block">
+			<div id="userInfo">
+				<h:form id="logout_form"> 
+					<p>
+						[-USUARIO LOGADO-] -
+						<h:commandLink value="Sair" action="#{loginBean.sair}"/>
+					</p>
+				</h:form>
+			</div>
+			<div id="menuWrap">
+				<ul id="menuElementsEn">
+					<li><a href="${ctx}/home.xhtml">Home</a></li>
+					<li><a href="${ctx}/pages/dashboard/dashboard.xhtml">Dashboard</a></li>
+					<li><a href="${ctx}/pages/projeto/lista.xhtml">Projetos</a></li>
+					<li><a href="${ctx}/pages/usuario/lista.xhtml">Usuarios</a></li>
+					<li><a href="${ctx}/pages/issue/lista.xhtml">Issues</a></li>
+				</ul><!-- menuElements-->
+			</div><!-- menuWrap-->
+		</h:panelGroup>
+		
+		<h:panelGroup id="mensagens" layout="block">
+			<h:messages infoClass="notice" errorClass="errors" />
+		</h:panelGroup>
+		
+		<div id="contentWrap" align="center">
+			<div id="container" align="left">
+				<!-- Insira o Conteudo aqui -->
+			</div>
+		</div>
+		
+		<div id="footerWrap">
+		     <div class="footbar" >
+				<p>
+					<a href="${ctx}">Issue Tracker</a> - Registrando Bugs e Features para toda a vida
+				</p>
+			</div><!-- footer content -->
+		</div><!-- footer wrap-->
+		
+	</body>
+</html>

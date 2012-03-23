@@ -12,6 +12,14 @@
 		<el-resolver>
 			org.springframework.web.jsf.el.SpringBeanFacesELResolver
 		</el-resolver>
+		<!-- Internacionalizacao -->
+		<message-bundle>
+    			br.com.triadworks.issuetracker.resources.Messages
+	    	</message-bundle>
+	    	<locale-config>
+	    		<default-locale>pt_BR</default-locale>
+	    		<supported-locale>pt_BR</supported-locale>
+	    	</locale-config>
     </application>
 
 </faces-config>

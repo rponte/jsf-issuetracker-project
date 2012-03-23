@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	
+	<display-name>issuetracker</display-name>
+	
+	<!-- ******************************************************* -->
+	<!-- Configuracao do Spring -->
+	<!-- ******************************************************* -->
+	
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/config/spring/applicationContext.xml,
+			/WEB-INF/config/spring/applicationContext-persistence.xml
+		</param-value>
+	</context-param>
+	
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	
+	<!-- RequestContextListener listener enables spring scopes with @Scope annotation -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
+	
+	<!-- Spring (Jpa Support) - OpenEntityManagerInViewFilter -->
+	<filter>
+		<description>
+			Necessário para o Lazy Loading funcionar quando as entidades
+			gerenciadas pelo EntityManager forem utilizadas em
+			ManagedBeans ou em JSPs.
+
+			Um bean com o id 'entityManagerFactory' precisa existir no
+			applicationContext.xml. Se precisar pode ser informado um
+			parâmetro no filtro para indicar qual o id do bean é o
+			EntityManagerFactory. (Ver documentação do Spring)
+		</description>
+		<filter-name>oemiv</filter-name>
+		<filter-class>
+			org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>oemiv</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- ******************************************************* -->
+	<!-- Configuracao do JSF -->
+	<!-- ******************************************************* -->
+
+	<context-param>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>
+			/WEB-INF/faces-config.xml
+		</param-value>
+	</context-param>
+	
+	<!--
+		* Valid values are “Development”, “UnitTest”, “SystemTest”, or “Production”,
+		  corresponding to the enum constants of the class javax.faces.application.ProjectStage;
+		* Change to "Production" when you are ready to deploy;
+	-->
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	
+	<!-- Faces Servlet -->
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	
+	<!-- ******************************************************* -->
+	<!-- Configuracao da Aplicação -->
+	<!-- ******************************************************* -->
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+	
+	<!-- Maneira mais simples de evitar o ViewExpiredException 
+	<error-page>
+		<exception-type>
+			javax.faces.application.ViewExpiredException
+		</exception-type>
+		<location>/index.jsp</location>
+	</error-page>
+	-->
+	
+</web-app>
