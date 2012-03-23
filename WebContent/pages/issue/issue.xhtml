@@ -25,12 +25,11 @@
 			
 				<t:div id="blocoDePesquisa" rendered="#{issueAjaxBean.pesquisando}">
 					<div align="right">
-						<h:commandLink value="Novo" action="#{issueAjaxBean.preparaParaAdicionar}">
-							<f:ajax render="@form" execute="@form"/>
-						</h:commandLink> &#160;
-						<h:commandButton value="Listar" action="#{issueAjaxBean.lista}" >
-							<f:ajax render="tabela_de_issues" />
-						</h:commandButton>
+						<p:commandLink value="Novo" action="#{issueAjaxBean.preparaParaAdicionar}" 
+							update="@form" process="@form">
+						</p:commandLink> &#160;
+						<p:commandButton value="Listar" action="#{issueAjaxBean.lista}" update="tabela_de_issues">
+						</p:commandButton>
 					</div>
 					<t:div id="_tbl">
 						<h:dataTable
@@ -102,64 +101,64 @@
 					<div align="left">
 					
 						<h:outputLabel value="Sumário" for="sumario" />
-						<h:inputText value="#{issueAjaxBean.issue.sumario}"
+						<p:inputText value="#{issueAjaxBean.issue.sumario}"
 							required="true" id="sumario" label="Sumário">
 							<f:validateLength minimum="3" />
-						</h:inputText>
+						</p:inputText>
 						
 						<h:outputLabel value="Descrição" for="descricao"/>
-						<h:inputTextarea rows="6" value="#{issueAjaxBean.issue.descricao}"
+						<p:inputTextarea rows="6" value="#{issueAjaxBean.issue.descricao}"
 							required="true" id="descricao" label="Descrição"/>
 							
 						<h:outputLabel value="Projeto" for="projeto"/>
-						<h:selectOneMenu value="#{issueAjaxBean.issue.projeto}" 
+						<p:selectOneMenu value="#{issueAjaxBean.issue.projeto}" 
 							id="projeto" label="Projeto"
 							required="true">
 							<f:selectItem itemLabel="Selecione um projeto" noSelectionOption="true" />
 							<f:selectItems value="#{issueAjaxBean.projetos}" var="o"
 	   								itemLabel="#{o.nome}" itemValue="#{o}" />
-						</h:selectOneMenu>
+						</p:selectOneMenu>
 						
 						<h:outputLabel value="Tipo" for="tipo"/>
-						<h:selectOneRadio value="#{issueAjaxBean.issue.tipo}" 
+						<p:selectOneRadio value="#{issueAjaxBean.issue.tipo}" 
 							id="tipo" layout="pageDirection" required="true" label="Tipo" 
 							disabled="#{issueAjaxBean.editando}">
 							<f:selectItem itemLabel="Bug" itemValue="BUG" />
 							<f:selectItem itemLabel="Feature" itemValue="FEATURE" />
-						</h:selectOneRadio>
+						</p:selectOneRadio>
 						
 						<h:outputLabel value="Reportado em" for="reportadoEm" />
-						<h:inputText value="#{issueAjaxBean.issue.reportadoEm}"
+						<p:inputText value="#{issueAjaxBean.issue.reportadoEm}"
 							required="true" id="reportadoEm" label="Reportado em" disabled="#{issueAjaxBean.editando}">
 							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-						</h:inputText>
+						</p:inputText>
 						
 						<h:outputLabel value="Reportado por" for="reportadoPor" />
-						<h:inputText value="#{issueAjaxBean.issue.reportadoPor.nome}"
+						<p:inputText value="#{issueAjaxBean.issue.reportadoPor.nome}"
 							required="true" id="reportadoPor" label="Reportado por" disabled="true">
-						</h:inputText>
+						</p:inputText>
 						
 						<h:outputLabel value="Assinado para" for="assinadoPara"/>
-						<h:selectOneMenu value="#{issueAjaxBean.issue.assinadoPara}" 
+						<p:selectOneMenu value="#{issueAjaxBean.issue.assinadoPara}" 
 							id="assinadoPara" label="Assinado para"
 							required="true" >
 							<f:selectItem itemLabel="Selecione um usuário" noSelectionOption="true" />
 							<f:selectItems value="#{issueAjaxBean.usuarios}" var="o"
 	   								itemLabel="#{o.nome}" itemValue="#{o}" />
-						</h:selectOneMenu>
+						</p:selectOneMenu>
 						
 						<div align="right">
-							<h:commandLink value="voltar" immediate="true" action="#{issueAjaxBean.volta}">
+							<p:commandLink value="voltar" immediate="true" action="#{issueAjaxBean.volta}">
 								<f:ajax render="@form" execute="@form"/>
-							</h:commandLink>  &#160;
-							<h:commandButton value="inserir" action="#{issueAjaxBean.adiciona}"
-								rendered="#{issueAjaxBean.adicionando}">
-								<f:ajax render="@form" execute="@form"/>
-							</h:commandButton>
-							<h:commandButton value="alterar" action="#{issueAjaxBean.altera}" 
+							</p:commandLink>  &#160;
+							<p:commandButton value="inserir" action="#{issueAjaxBean.adiciona}"
+								rendered="#{issueAjaxBean.adicionando}"
+								update="@form" process="@form">
+							</p:commandButton>
+							<p:commandButton value="alterar" action="#{issueAjaxBean.altera}" 
 								rendered="#{issueAjaxBean.editando}">
 								<f:ajax render="@form" execute="@form"/>
-							</h:commandButton>
+							</p:commandButton>
 						</div>
 					</div>
 				</t:div>

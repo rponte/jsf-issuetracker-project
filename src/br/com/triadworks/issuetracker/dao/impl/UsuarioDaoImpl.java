@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.triadworks.issuetracker.dao.UsuarioDao;
@@ -20,12 +21,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 	public List<Usuario> listaTudo() {
 		return entityManager
-				.createQuery("from Usuario")
+				.createQuery("from Usuario", Usuario.class)
 				.getResultList();
 	}
 
@@ -45,6 +45,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 	public Usuario buscaPor(String login, String senha) {
 		String hql = "from Usuario u where u.login = :login and u.senha = :senha";
 		Query query = entityManager.createQuery(hql)
@@ -58,6 +59,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 
 	@Override
+	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 	public Usuario carrega(Long id) {
 		return entityManager.find(Usuario.class, id);
 	}

@@ -10,9 +10,13 @@ import br.com.triadworks.issuetracker.service.Autenticador;
 @Service("autenticador")
 public class AutenticadorImpl implements Autenticador {
 
-	@Autowired
-	private UsuarioDao usuarioDao;
+	private final UsuarioDao usuarioDao;
 	
+	@Autowired
+	public AutenticadorImpl(UsuarioDao usuarioDao) {
+		this.usuarioDao = usuarioDao;
+	}
+
 	@Override
 	public Usuario autentica(String login, String senha) {
 		Usuario usuario = usuarioDao.buscaPor(login, senha);

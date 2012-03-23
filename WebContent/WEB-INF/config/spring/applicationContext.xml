@@ -13,10 +13,10 @@
 						http://www.springframework.org/schema/aop 
 						http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
-	<!-- Scans for @Repository, @Service and @Component -->
-	<context:component-scan base-package="br.com.triadworks.issuetracker" />
 	<!-- Activates scanning of @Autowired -->
 	<context:annotation-config />
+	<!-- Scans for @Repository, @Service and @Component -->
+	<context:component-scan base-package="br.com.triadworks.issuetracker" />
 	<!-- Enable @Transactional support -->
 	<tx:annotation-driven />
 	

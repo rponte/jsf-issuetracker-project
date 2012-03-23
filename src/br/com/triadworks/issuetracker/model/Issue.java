@@ -1,17 +1,27 @@
 package br.com.triadworks.issuetracker.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -21,10 +31,12 @@ public class Issue implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ISSUE")
+	@SequenceGenerator(name="SEQ_ISSUE", sequenceName="SEQ_ISSUE", allocationSize=1)
 	private Long id;
 	
 	private String sumario;
+	@Column(length=1000)
 	private String descricao;
 	
 	@ManyToOne
@@ -47,6 +59,12 @@ public class Issue implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	private Status status = Status.ABERTA;
+	
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.LAZY)
+	@JoinTable(name="issue_comentario", 
+		joinColumns=@JoinColumn(name="issue_id"),
+		inverseJoinColumns=@JoinColumn(name="comentario_id"))
+	private List<Comentario> comentarios = new ArrayList<Comentario>();
 	
 	public Long getId() {
 		return id;
@@ -107,6 +125,27 @@ public class Issue implements Serializable {
 	}
 	public void setStatus(Status status) {
 		this.status = status;
+	}
+	public List<Comentario> getComentarios() {
+		return Collections.unmodifiableList(comentarios);
+	}
+	
+	/**
+	 * Adiciona comentários à issue.
+	 */
+	public void adicionaComentario(Comentario comentario) {
+		
+		if (comentario.getAutor() == null)
+			throw new IllegalArgumentException("Autor nao pode ser vazio.");
+		
+		comentarios.add(comentario);
+	}
+	/**
+	 * Fecha issue com um comentário.
+	 */
+	public void fecha(Comentario comentario) {
+		this.status = Status.FECHADA;
+		this.adicionaComentario(comentario);
 	}
 	
 	@PrePersist

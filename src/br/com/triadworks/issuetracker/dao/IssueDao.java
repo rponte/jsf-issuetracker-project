@@ -14,4 +14,6 @@ public interface IssueDao {
 	
 	public void remove(Issue issue);
 	
+	public Issue carrega(Long id);
+	
 }

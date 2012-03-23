@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.triadworks.issuetracker.dao.IssueDao;
@@ -18,12 +19,11 @@ public class IssueDaoImpl implements IssueDao {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
-	@SuppressWarnings("unchecked")
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
 	public List<Issue> listaTudo() {
 		return entityManager
-				.createQuery("from Issue")
+				.createQuery("from Issue", Issue.class)
 				.getResultList();
 	}
 
@@ -40,6 +40,12 @@ public class IssueDaoImpl implements IssueDao {
 	@Override
 	public void remove(Issue issue) {
 		entityManager.remove(entityManager.merge(issue));
+	}
+
+	@Override
+	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	public Issue carrega(Long id) {
+		return entityManager.find(Issue.class, id);
 	}
 
 }
