@@ -13,5 +13,26 @@
 			org.springframework.web.jsf.el.SpringBeanFacesELResolver
 		</el-resolver>
     </application>
+    
+    <managed-bean>
+    		<managed-bean-name>loginBean</managed-bean-name>
+    		<managed-bean-class>
+    			br.com.triadworks.issuetracker.controller.LoginBean
+    		</managed-bean-class>
+    		<managed-bean-scope>request</managed-bean-scope>
+    		<managed-property>
+    			<property-name>autenticador</property-name>
+    			<value>#{autenticador}</value>
+    		</managed-property>
+    </managed-bean>
 
 </faces-config>
+
+
+
+
+
+
+
+
+
