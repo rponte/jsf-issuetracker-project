@@ -16,11 +16,11 @@
 	
 	<body>
 	
-		<h:panelGroup rendered="false" layout="block">
+		<h:panelGroup rendered="#{usuarioWeb.logado}" layout="block">
 			<div id="userInfo">
 				<h:form id="logout_form"> 
 					<p>
-						[-USUARIO LOGADO-] -
+						#{usuarioWeb.usuario.login} -
 						<h:commandLink value="Sair" action="#{loginBean.sair}"/>
 					</p>
 				</h:form>
@@ -43,26 +43,11 @@
 		
 		<div id="contentWrap" align="center">
 			<div id="container" align="left">
-				
-				<h:form id="form" prependId="true">
-				
-					<fieldset id="login">
-						<legend>Acesse o Sistema</legend>
-						<h:outputLabel value="Login" for="login" />
-						<h:inputText id="login" value="#{loginBean.login}" 
-							required="true" label="Login" 
-							requiredMessage="Login é campo obrigatório" />
-						<h:message for="login" errorClass="errors" />
-						<h:outputLabel value="Senha" for="senha" />
-						<h:inputSecret id="senha" value="#{loginBean.senha}" />
-						<br />
-						<h:commandButton 
-							id="logar"
-							value="Logar" action="#{loginBean.logar}" />
-					</fieldset>
-				
-				</h:form>
-
+			
+				<div id="welcome">
+					Bem vindo <b>#{usuarioWeb.usuario.login}</b> ao sistema Issue Tracker.
+				</div>
+								
 			</div>
 		</div>
 		

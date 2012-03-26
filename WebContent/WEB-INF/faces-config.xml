@@ -15,6 +15,26 @@
     </application>
     
     <managed-bean>
+    		<managed-bean-name>usuarioWeb</managed-bean-name>
+    		<managed-bean-class>
+    			br.com.triadworks.issuetracker.controller.UsuarioWeb
+    		</managed-bean-class>
+    		<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    
+    <managed-bean>
+    		<managed-bean-name>facesUtils</managed-bean-name>
+    		<managed-bean-class>
+    			br.com.triadworks.issuetracker.controller.util.FacesUtils
+    		</managed-bean-class>
+    		<managed-bean-scope>request</managed-bean-scope>
+    		<managed-property>
+    			<property-name>facesContext</property-name>
+    			<value>#{facesContext}</value>
+    		</managed-property>
+    </managed-bean>
+    
+    <managed-bean>
     		<managed-bean-name>loginBean</managed-bean-name>
     		<managed-bean-class>
     			br.com.triadworks.issuetracker.controller.LoginBean
@@ -24,8 +44,34 @@
     			<property-name>autenticador</property-name>
     			<value>#{autenticador}</value>
     		</managed-property>
+    		<managed-property>
+    			<property-name>usuarioWeb</property-name>
+    			<value>#{usuarioWeb}</value>
+    		</managed-property>
+    		<managed-property>
+    			<property-name>facesUtils</property-name>
+    			<value>#{facesUtils}</value>
+    		</managed-property>
     </managed-bean>
-
+    
+    
+    <navigation-rule>
+		<from-view-id>/pages/login.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>home</from-outcome>
+			<to-view-id>home.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>login</from-outcome>
+			<to-view-id>/pages/login.xhtml</to-view-id>
+		</navigation-case>
+    </navigation-rule>
+    
 </faces-config>
 
 
