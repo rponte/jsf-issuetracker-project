@@ -1,7 +1,12 @@
 package br.com.triadworks.issuetracker.controller;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+
 import br.com.triadworks.issuetracker.model.Usuario;
 
+@ManagedBean
+@SessionScoped
 public class UsuarioWeb {
 
 	private Usuario usuario;

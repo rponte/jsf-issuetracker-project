@@ -1,15 +1,24 @@
 package br.com.triadworks.issuetracker.controller;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
+
 import br.com.triadworks.issuetracker.controller.util.FacesUtils;
 import br.com.triadworks.issuetracker.model.Usuario;
 import br.com.triadworks.issuetracker.service.Autenticador;
 
+@ManagedBean(name="loginBean")
+@RequestScoped
 public class LoginBean {
 
 	private String login;
 	private String senha;
 	
+	@ManagedProperty("#{autenticador}")
 	private Autenticador autenticador;
+	@ManagedProperty("#{usuarioWeb}")
 	private UsuarioWeb usuarioWeb;
+	@ManagedProperty("#{facesUtils}")
 	private FacesUtils facesUtils;
 	
 	public String logar() {
@@ -17,7 +26,7 @@ public class LoginBean {
 		Usuario usuario = autenticador.autentica(login, senha);
 		if (usuario != null) {
 			usuarioWeb.loga(usuario);
-			return "home"; // outcome
+			return "/home?faces-redirect=true"; // outcome
 		}
 
 		facesUtils.adicionaMensagemDeErro("Login ou senha invalida.");

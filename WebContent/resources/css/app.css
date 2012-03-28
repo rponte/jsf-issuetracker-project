@@ -20,6 +20,10 @@ input, label, select, textarea {
 	color: #444;
 }
 
+input.texto-longo {
+	width:600px;
+}
+
 td label {
 	display: inline;
 }
@@ -137,6 +141,13 @@ fieldset {
 	border:1px solid #a29bc0;
 	padding: 10px;
 }
+
+fieldset.confirma-senha {
+	background-color: #ddd;
+	margin-left: 0;
+	margin-bottom: 15px;
+}
+
 code *, pre * {
 	font-family: monospace;
 }

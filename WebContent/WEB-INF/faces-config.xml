@@ -12,8 +12,20 @@
 		<el-resolver>
 			org.springframework.web.jsf.el.SpringBeanFacesELResolver
 		</el-resolver>
+		<resource-bundle>
+			<base-name>br.com.triadworks.issuetracker.resources.AppMessages</base-name>
+			<var>text</var>
+		</resource-bundle>
+		<message-bundle>
+			br.com.triadworks.issuetracker.resources.Messages
+		</message-bundle>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>pt_BR</supported-locale>
+		</locale-config>
     </application>
     
+    <!-- 
     <managed-bean>
     		<managed-bean-name>usuarioWeb</managed-bean-name>
     		<managed-bean-class>
@@ -33,7 +45,9 @@
     			<value>#{facesContext}</value>
     		</managed-property>
     </managed-bean>
+     -->
     
+    <!-- 
     <managed-bean>
     		<managed-bean-name>loginBean</managed-bean-name>
     		<managed-bean-class>
@@ -53,8 +67,9 @@
     			<value>#{facesUtils}</value>
     		</managed-property>
     </managed-bean>
+     -->
     
-    
+    <!-- 
     <navigation-rule>
 		<from-view-id>/pages/login.xhtml</from-view-id>
 		<navigation-case>
@@ -63,12 +78,14 @@
 			<redirect />
 		</navigation-case>
     </navigation-rule>
+     -->
     
     <navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>login</from-outcome>
 			<to-view-id>/pages/login.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
     </navigation-rule>
     
