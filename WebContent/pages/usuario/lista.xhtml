@@ -1,104 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	template="/pages/template/template_padrao.xhtml">
 	
-	<!-- Um alias para facilitar nossa vida -->
-	<c:set var="ctx" value="#{request.contextPath}" scope="request"/>
-	
-	<h:head>
-       <title>Issue Tracker</title>
-       <h:outputStylesheet library="css" name="app.css" />
-    </h:head>
-	
-	<body>
-	
-		<h:panelGroup rendered="#{usuarioWeb.logado}" layout="block">
-			<div id="userInfo">
-				<h:form id="logout_form"> 
-					<p>
-						#{usuarioWeb.usuario.login} -
-						<h:commandLink value="Sair" action="#{loginBean.sair}"/>
-					</p>
-				</h:form>
-			</div>
-			<div id="menuWrap">
-				<ul id="menuElementsEn">
-					<li><a href="${ctx}/home.xhtml">Home</a></li>
-					<li><a href="${ctx}/pages/dashboard/dashboard.xhtml">Dashboard</a></li>
-					<li><a href="${ctx}/pages/projeto/lista.xhtml">Projetos</a></li>
-					<li><a href="${ctx}/pages/usuario/lista.xhtml">Usuarios</a></li>
-					<li><a href="${ctx}/pages/issue/lista.xhtml">Issues</a></li>
-				</ul><!-- menuElements-->
-			</div><!-- menuWrap-->
-		</h:panelGroup>
-		
-		<h:panelGroup id="mensagens" layout="block">
-			<h:messages infoClass="notice" errorClass="errors" 
-				globalOnly="false" />
-		</h:panelGroup>
-		
-		<div id="contentWrap" align="center">
-			<div id="container" align="left">
-				<h1>Cadastro de Usuários</h1>
-				
-				<h:form>
-					<div align="right">
-						<h:commandLink value="Novo" action="novo?faces-redirect=true" /> &#160;
-						<h:commandButton value="Listar" 
-							action="#{usuarioBean.lista}"/>
-					</div>
-					
-					<h:dataTable
-						value="#{usuarioBean.usuarios}"
-						var="usuario"
-						rowClasses="odd, even">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="ID" />
-							</f:facet>
-							##{usuario.id}
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Nome" />
-							</f:facet>
-							#{usuario.nome}
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Login" />
-							</f:facet>
-							#{usuario.login}
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="E-mail" />
-							</f:facet>
-							#{usuario.email}
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="Ações" />
-							</f:facet>
-						</h:column>
-					</h:dataTable>
-					
-				</h:form>
-				
-			</div>
+	<ui:define name="conteudo">
+		<div id="container" align="left">
+			<h1>Cadastro de Usuários</h1>
+			
+			<t:saveState value="#{usuarioBean.usuarios}" />
+			
+			<h:form>
+				<div align="right">
+					<h:commandLink value="Novo" action="novo?faces-redirect=true" /> &#160;
+					<h:commandButton value="Listar" 
+						action="#{usuarioBean.lista}"/>
+				</div>
+				<h:dataTable
+					value="#{usuarioBean.usuarios}"
+					var="usuario"
+					rowClasses="odd, even">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="ID" />
+						</f:facet>
+						##{usuario.id}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						#{usuario.nome}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Login" />
+						</f:facet>
+						#{usuario.login}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="E-mail" />
+						</f:facet>
+						#{usuario.email}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Ações" />
+						</f:facet>
+						<h:commandLink value="editar"
+							action="#{usuarioBean.preparaParaAlterar(usuario)}">
+						</h:commandLink>  &#160;
+						<h:commandLink value="remover"
+							action="#{usuarioBean.remove}"
+							onclick="return confirm('Deseja realmente remover este usuário?');">
+							<f:setPropertyActionListener 
+								target="#{usuarioBean.usuario}" value="#{usuario}" />
+						</h:commandLink>
+					</h:column>
+				</h:dataTable>
+			</h:form>
 		</div>
+	</ui:define>
 		
-		<div id="footerWrap">
-		     <div class="footbar" >
-				<p>
-					<a href="${ctx}">Issue Tracker</a> - Registrando Bugs e Features para toda a vida
-				</p>
-			</div><!-- footer content -->
-		</div><!-- footer wrap-->
-		
-	</body>
-</html>
+</ui:composition>

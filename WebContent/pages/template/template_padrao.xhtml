@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<!-- Um alias para facilitar nossa vida -->
+	<c:set var="ctx" value="#{request.contextPath}" scope="request"/>
+	
+	<h:head>
+       <title>Issue Tracker</title>
+       <h:outputStylesheet library="css" name="app.css" />
+    </h:head>
+	
+	<h:body>
+	
+		<ui:insert name="cabecalho">
+			<ui:include src="/pages/template/cabecalho.xhtml" />
+		</ui:insert>
+		
+		<ui:insert name="mensagens">
+			<h:panelGroup id="mensagens" layout="block">
+				<h:messages infoClass="notice" errorClass="errors" 
+					globalOnly="false" />
+			</h:panelGroup>
+		</ui:insert>
+		
+		<div id="contentWrap" align="center">
+			<ui:insert name="conteudo">
+				<!-- entre com o conteudo aqui -->
+			</ui:insert>
+		</div>
+		
+		<ui:insert name="rodape">
+			<ui:include src="/pages/template/rodape.xhtml" />
+		</ui:insert>
+		
+	</h:body>
+	
+</html>

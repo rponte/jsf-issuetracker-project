@@ -11,6 +11,8 @@
 		<div id="container" align="left">
 			<h1>Cadastro de Usuários</h1>
 			
+			<t:saveState value="#{usuarioBean.usuario}" />
+			
 			<h:form>
 				<h:outputLabel value="Nome" for="nome" />
 				<h:inputText id="nome" styleClass="texto-longo"
@@ -48,7 +50,7 @@
 						immediate="true" 
 						action="lista?faces-redirect=true" /> &#160;
 					<h:commandButton value="Salvar" 
-						action="#{usuarioBean.adiciona}"/>
+						action="#{usuarioBean.altera}"/>
 				</div>
 			</h:form>
 		</div>
