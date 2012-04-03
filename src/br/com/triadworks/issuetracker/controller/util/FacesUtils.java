@@ -1,17 +1,22 @@
 package br.com.triadworks.issuetracker.controller.util;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.component.EditableValueHolder;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 
-@ManagedBean
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class FacesUtils {
 	
-	@ManagedProperty("#{facesContext}")
 	private FacesContext facesContext;
+	
+	@Autowired
+	public FacesUtils(FacesContext facesContext) {
+		this.facesContext = facesContext;
+	}
 
 	public void adicionaMensagemDeErro(String mensagem) {
 		FacesMessage facesMessage 
@@ -23,10 +28,6 @@ public class FacesUtils {
 		FacesMessage facesMessage 
 			= new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem, mensagem);
 		facesContext.addMessage(null, facesMessage);
-	}
-	
-	public void setFacesContext(FacesContext facesContext) {
-		this.facesContext = facesContext;
 	}
 	
 	/**

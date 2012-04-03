@@ -15,5 +15,7 @@ public interface IssueDao {
 	public void remove(Issue issue);
 	
 	public Issue carrega(Long id);
+
+	public List<Issue> getIssuesDoUsuario(Long id);
 	
 }

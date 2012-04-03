@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	template="/pages/template/template_padrao.xhtml">
+	
+	<ui:define name="conteudo">
+		<div id="container" align="left">
+			<h1>Dashboard</h1>
+			<t:div id="dashboard">
+				<h:dataTable
+					id="tabela"
+					value="#{dashboardBean.issues}"
+					var="issue"
+					rowClasses="odd, even">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="ID" />
+						</f:facet>
+						<h:link value="##{issue.id}" outcome="detalhe">
+							<f:param name="id" value="#{issue.id}" />
+						</h:link>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Sumário" />
+						</f:facet>
+						<h:link value="#{issue.sumario}" outcome="detalhe">
+							<f:param name="id" value="#{issue.id}" />
+						</h:link>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Projeto" />
+						</f:facet>
+						#{issue.projeto.nome}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Tipo" />
+						</f:facet>
+						#{issue.tipo}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Status" />
+						</f:facet>
+						#{issue.status}
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="Ult. Atualização" />
+						</f:facet>
+						<h:outputText value="#{issue.atualizadoEm}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+						</h:outputText>
+					</h:column>
+				</h:dataTable>
+			</t:div>
+		</div>
+	</ui:define>
+		
+</ui:composition>

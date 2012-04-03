@@ -48,4 +48,13 @@ public class IssueDaoImpl implements IssueDao {
 		return entityManager.find(Issue.class, id);
 	}
 
+	@Override
+	@Transactional(propagation=Propagation.SUPPORTS, readOnly=true)
+	public List<Issue> getIssuesDoUsuario(Long id) {
+		return entityManager
+				.createQuery("from Issue where assinadoPara.id = :id", Issue.class)
+				.setParameter("id", id)
+				.getResultList();
+	}
+
 }
