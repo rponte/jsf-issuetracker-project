@@ -11,9 +11,10 @@
 		<div id="container" align="left">
 			<h1>Cadastro de Usuários</h1>
 			
-			<t:saveState value="#{usuarioBean.usuario}" />
+			<t:saveState value="#{usuarioBean.usuario}"/>
 			
-			<h:form>
+			<h:form id="form">
+			
 				<h:outputLabel value="Nome" for="nome" />
 				<h:inputText id="nome" styleClass="texto-longo"
 					value="#{usuarioBean.usuario.nome}" 
@@ -50,7 +51,9 @@
 						immediate="true" 
 						action="lista?faces-redirect=true" /> &#160;
 					<h:commandButton value="Salvar" 
-						action="#{usuarioBean.altera}"/>
+						action="#{usuarioBean.altera}">
+						<f:ajax execute="@form" render=":mensagens @all" />
+					</h:commandButton>
 				</div>
 			</h:form>
 		</div>

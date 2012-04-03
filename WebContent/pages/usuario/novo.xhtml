@@ -48,7 +48,9 @@
 						immediate="true" 
 						action="lista?faces-redirect=true" /> &#160;
 					<h:commandButton value="Salvar" 
-						action="#{usuarioBean.adiciona}"/>
+						action="#{usuarioBean.adiciona}">
+						<f:ajax execute="@form" render=":mensagens" />
+					</h:commandButton>
 				</div>
 			</h:form>
 		</div>

@@ -11,15 +11,19 @@
 		<div id="container" align="left">
 			<h1>Cadastro de Usuários</h1>
 			
-			<t:saveState value="#{usuarioBean.usuarios}" />
-			
 			<h:form>
+			
+				<t:saveState value="#{usuarioBean.usuarios}" />
+				
 				<div align="right">
 					<h:commandLink value="Novo" action="novo?faces-redirect=true" /> &#160;
 					<h:commandButton value="Listar" 
-						action="#{usuarioBean.lista}"/>
+						action="#{usuarioBean.lista}">
+						<f:ajax render="tabela :mensagens" />
+					</h:commandButton>
 				</div>
 				<h:dataTable
+					id="tabela"
 					value="#{usuarioBean.usuarios}"
 					var="usuario"
 					rowClasses="odd, even">
@@ -57,6 +61,7 @@
 						<h:commandLink value="remover"
 							action="#{usuarioBean.remove}"
 							onclick="return confirm('Deseja realmente remover este usuário?');">
+							<f:ajax render="@form" />
 							<f:setPropertyActionListener 
 								target="#{usuarioBean.usuario}" value="#{usuario}" />
 						</h:commandLink>

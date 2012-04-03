@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	template="/pages/template/template_padrao.xhtml">
+	
+	<ui:define name="conteudo">
+		<div id="container" align="left">
+			<h1>Cadastro de Projeto</h1>
+			
+			<h:form binding="#{projetoBean.form}">
+			
+				<t:saveState value="#{projetoBean.state}"/>
+				<t:saveState value="#{projetoBean.projeto}"/>
+				<t:saveState value="#{projetoBean.projetos}" />
+				
+				<t:div id="blocoDePesquisa" rendered="#{projetoBean.pesquisando}">
+					<div align="right">
+						<h:commandLink value="Novo" 
+							action="#{projetoBean.preparaParaAdicionar}">
+							<f:ajax render="@form" />
+						</h:commandLink> &#160;
+						<h:commandButton value="Listar" 
+							action="#{projetoBean.lista}">
+							<f:ajax render="tabela :mensagens" />
+						</h:commandButton>
+					</div>
+					<h:dataTable
+						id="tabela"
+						value="#{projetoBean.projetos}"
+						var="projeto"
+						rowClasses="odd, even">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="ID" />
+							</f:facet>
+							##{projeto.id}
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							#{projeto.nome}
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ações" />
+							</f:facet>
+							<h:commandLink value="editar"
+								action="#{projetoBean.preparaParaAlterar(projeto)}">
+								<f:ajax render="@form" />
+							</h:commandLink>  &#160;
+							<h:commandLink value="remover"
+								action="#{projetoBean.remove}"
+								onclick="return confirm('Deseja realmente remover este usuário?');">
+								<f:ajax render="@form :mensagens" />
+								<f:setPropertyActionListener 
+									target="#{projetoBean.projeto}" value="#{projeto}" />
+							</h:commandLink>
+						</h:column>
+					</h:dataTable>
+				</t:div>
+				
+				<t:div id="blocoDeEdicao" 
+					rendered="#{not projetoBean.pesquisando}">
+					<h:outputLabel value="Nome" for="nome" />
+					<h:inputText id="nome" styleClass="texto-longo"
+						value="#{projetoBean.projeto.nome}" 
+						label="Nome" 
+						required="true" />
+					<div align="right">
+						<h:commandLink value="Voltar"
+							immediate="true" 
+							action="#{projetoBean.voltar}" >
+							<f:ajax execute="@form" render="@form :mensagens" />
+						</h:commandLink> &#160;
+						<h:commandButton value="Inserir" 
+							action="#{projetoBean.adiciona}"
+							rendered="#{projetoBean.adicionando}">
+							<f:ajax execute="@form" render="@form :mensagens" />
+						</h:commandButton>
+						<h:commandButton value="Alterar" 
+							action="#{projetoBean.altera}"
+							rendered="#{projetoBean.editando}">
+							<f:ajax execute="@form" render="@form :mensagens" />
+						</h:commandButton>
+					</div>
+				</t:div>
+			
+			</h:form>
+			
+		</div>
+	</ui:define>
+		
+</ui:composition>

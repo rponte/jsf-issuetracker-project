@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	template="/pages/template/template_padrao.xhtml">
+	
+	<ui:define name="conteudo">
+		<div id="container" align="left">
+			<h1>Cadastro de Usuários</h1>
+			
+			<h:form binding="#{usuarioBean.form}">
+			
+				<t:saveState value="#{usuarioBean.state}"/>
+				<t:saveState value="#{usuarioBean.usuario}"/>
+				<t:saveState value="#{usuarioBean.usuarios}" />
+				
+				<t:div id="blocoDePesquisa" rendered="#{usuarioBean.pesquisando}">
+					<div align="right">
+						<h:commandLink value="Novo" 
+							action="#{usuarioBean.preparaParaAdicionar}">
+							<f:ajax render="@form" />
+						</h:commandLink> &#160;
+						<h:commandButton value="Listar" 
+							action="#{usuarioBean.lista}">
+							<f:ajax render="tabela :mensagens" />
+						</h:commandButton>
+					</div>
+					<h:dataTable
+						id="tabela"
+						value="#{usuarioBean.usuarios}"
+						var="usuario"
+						rowClasses="odd, even">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="ID" />
+							</f:facet>
+							##{usuario.id}
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Nome" />
+							</f:facet>
+							#{usuario.nome}
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Login" />
+							</f:facet>
+							#{usuario.login}
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="E-mail" />
+							</f:facet>
+							#{usuario.email}
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="Ações" />
+							</f:facet>
+							<h:commandLink value="editar"
+								action="#{usuarioBean.preparaParaAlterar(usuario)}">
+								<f:ajax render="@form" />
+							</h:commandLink>  &#160;
+							<h:commandLink value="remover"
+								action="#{usuarioBean.remove}"
+								onclick="return confirm('Deseja realmente remover este usuário?');">
+								<f:ajax render="@form :mensagens" />
+								<f:setPropertyActionListener 
+									target="#{usuarioBean.usuario}" value="#{usuario}" />
+							</h:commandLink>
+						</h:column>
+					</h:dataTable>
+				</t:div>
+				
+				<t:div id="blocoDeEdicao" 
+					rendered="#{not usuarioBean.pesquisando}">
+					<h:outputLabel value="Nome" for="nome" />
+					<h:inputText id="nome" styleClass="texto-longo"
+						value="#{usuarioBean.usuario.nome}" 
+						label="Nome" 
+						required="true" />
+					<h:outputLabel value="Login" for="login" />
+					<h:inputText id="login" 
+						value="#{usuarioBean.usuario.login}" 
+						label="Login"
+						required="true">
+						<f:validateLength minimum="4" />
+					</h:inputText>
+					<h:outputLabel value="E-mail" for="email" />
+					<h:inputText id="email" 
+						value="#{usuarioBean.usuario.email}" 
+						label="E-mail" 
+						required="true" />
+					<fieldset class="confirma-senha">
+						<legend>Entre com a senha e confirmação de senha</legend>
+						<h:outputLabel value="Senha" for="senha" />
+						<h:inputSecret id="senha" 
+							value="#{usuarioBean.usuario.senha}" 
+							label="Senha" 
+							required="true" 
+							redisplay="true" />
+						<h:outputLabel value="Confirma" for="confirmacaoDeSenha" />
+						<h:inputSecret id="confirmacaoDeSenha" 
+							value="#{usuarioBean.confirmacaoDeSenha}"
+							label="Confirma" 
+							required="true" />
+					</fieldset>
+					<div align="right">
+						<h:commandLink value="Voltar"
+							immediate="true" 
+							action="#{usuarioBean.voltar}" >
+							<f:ajax execute="@form" render="@form :mensagens" />
+						</h:commandLink> &#160;
+						<h:commandButton value="Inserir" 
+							action="#{usuarioBean.adiciona}"
+							rendered="#{usuarioBean.adicionando}">
+							<f:ajax execute="@form" render="@form :mensagens" />
+						</h:commandButton>
+						<h:commandButton value="Alterar" 
+							action="#{usuarioBean.altera}"
+							rendered="#{usuarioBean.editando}">
+							<f:ajax execute="@form" render="@form :mensagens" />
+						</h:commandButton>
+					</div>
+				</t:div>
+			
+			</h:form>
+			
+		</div>
+	</ui:define>
+		
+</ui:composition>
