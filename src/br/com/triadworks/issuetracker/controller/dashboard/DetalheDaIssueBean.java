@@ -35,16 +35,16 @@ public class DetalheDaIssueBean {
 	 */
 	public void init() {
 		if (id == null) {
-            String mensagem = "ID da issue inválida, por favor use um link de dentro do sistema.";
-            facesUtils.adicionaMensagemDeErro(mensagem);
-            return;
-        }
+			String mensagem = "ID da issue inválida, por favor use um link de dentro do sistema.";
+			facesUtils.adicionaMensagemDeErro(mensagem);
+			return;
+		}
 		
 		issue = issueDao.carrega(id);
 		if (issue == null) {
-            String mensagem = "Issue com ID #" + id + " não encontrada.";
-            facesUtils.adicionaMensagemDeErro(mensagem);
-        }
+			String mensagem = "Issue com ID #" + id + " não encontrada.";
+			facesUtils.adicionaMensagemDeErro(mensagem);
+		}
 	}
 	
 	/**
