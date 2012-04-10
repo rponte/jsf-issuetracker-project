@@ -1,6 +1,7 @@
 package br.com.triadworks.issuetracker.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.component.UIForm;
@@ -8,11 +9,10 @@ import javax.faces.component.UIForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
 import br.com.triadworks.issuetracker.controller.util.FacesUtils;
 import br.com.triadworks.issuetracker.dao.IssueDao;
 import br.com.triadworks.issuetracker.model.Issue;
-import br.com.triadworks.issuetracker.model.Projeto;
-import br.com.triadworks.issuetracker.model.Usuario;
 
 @Controller
 @Scope("request")
@@ -46,22 +46,23 @@ public class IssueBean {
 	
 	public void preparaParaAdicionar() {
 		this.issue = new Issue();
-		issue.setProjeto(new Projeto());
-		issue.setAssinadoPara(new Usuario());
+//		issue.setProjeto(new Projeto()); // não mais necessário por causa do converter
+//		issue.setAssinadoPara(new Usuario());  // não mais necessário por causa do converter
 		issue.setReportadoPor(usuarioWeb.getUsuario());
+		issue.setReportadoEm(new Date());
 		facesUtils.cleanSubmittedValues(form); // limpa arvore
 		setState(ESTADO_DE_NOVO);
 	}
 	
 	public void adiciona() {
 		issueDao.salva(issue);
-		facesUtils.adicionaMensagemDeInformacao("Issue adicionado com sucesso!");
+		facesUtils.adicionaMensagemDeInformacao("Issue adicionada com sucesso!");
 		lista();
 	}
 	
 	public void remove() {
 		issueDao.remove(issue);
-		facesUtils.adicionaMensagemDeInformacao("Issue removido com sucesso!");
+		facesUtils.adicionaMensagemDeInformacao("Issue removida com sucesso!");
 		lista();
 	}
 	
@@ -73,7 +74,7 @@ public class IssueBean {
 	
 	public void altera() {
 		issueDao.atualiza(issue);
-		facesUtils.adicionaMensagemDeInformacao("Issue atualizado com sucesso!");
+		facesUtils.adicionaMensagemDeInformacao("Issue atualizada com sucesso!");
 		lista();
 	}
 	
