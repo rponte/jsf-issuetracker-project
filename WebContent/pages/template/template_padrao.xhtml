@@ -4,7 +4,8 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 	
 	<!-- Um alias para facilitar nossa vida -->
 	<c:set var="ctx" value="#{request.contextPath}" scope="request"/>
@@ -21,13 +22,24 @@
 		</ui:insert>
 		
 		<ui:insert name="mensagens">
-			<h:panelGroup id="mensagens" layout="block">
-				<h:messages infoClass="notice" errorClass="errors" 
-					globalOnly="false" />
-			</h:panelGroup>
+			<p:outputPanel autoUpdate="true">
+				<h:panelGroup id="mensagens" layout="block">
+					<h:messages infoClass="notice" errorClass="errors" />
+				</h:panelGroup>
+			</p:outputPanel>
 		</ui:insert>
 		
 		<div id="contentWrap" align="center">
+			<div id="ajax-loading">
+				<p:ajaxStatus>
+					<f:facet name="start">
+	                    <h:graphicImage library="images" name="ajax-loader.gif" />
+	                </f:facet>
+					<f:facet name="complete">
+						<h:outputText value="" />
+	                </f:facet>
+				</p:ajaxStatus>
+			</div>
 			<ui:insert name="conteudo">
 				<!-- entre com o conteudo aqui -->
 			</ui:insert>

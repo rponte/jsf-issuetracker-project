@@ -5,6 +5,7 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/template_padrao.xhtml">
 	
 	<ui:define name="conteudo">
@@ -21,11 +22,11 @@
 					<div align="right">
 						<h:commandLink value="Novo" 
 							action="#{issueBean.preparaParaAdicionar}">
-							<f:ajax render="@form" />
+							<p:ajax update="@form" />
 						</h:commandLink> &#160;
 						<h:commandButton value="Listar" 
 							action="#{issueBean.lista}">
-							<f:ajax render="tabela :mensagens" />
+							<p:ajax update="tabela" />
 						</h:commandButton>
 					</div>
 					<h:dataTable
@@ -83,12 +84,12 @@
 							</f:facet>
 							<h:commandLink value="editar"
 								action="#{issueBean.preparaParaAlterar(issue)}">
-								<f:ajax render="@form" />
+								<p:ajax update="@form" />
 							</h:commandLink>  &#160;
 							<h:commandLink value="remover"
 								action="#{issueBean.remove}"
 								onclick="return confirm('Deseja realmente remover este usuário?');">
-								<f:ajax render="@form :mensagens" />
+								<p:ajax update="@form" />
 								<f:setPropertyActionListener 
 									target="#{issueBean.issue}" value="#{issue}" />
 							</h:commandLink>
@@ -111,8 +112,7 @@
 					<h:outputLabel value="Projeto" for="projeto" />
 					<h:selectOneMenu id="projeto" label="Projeto"
 						value="#{issueBean.issue.projeto}"
-						required="true" disabled="#{issueBean.editando}"
-						converter="#{projetoConverter}">
+						required="true" disabled="#{issueBean.editando}">
 						<f:selectItem itemLabel="Selecione um projeto" noSelectionOption="true" />
 						<f:selectItems value="#{projetoDao.listaTudo()}" var="o" 
 							itemLabel="#{o.nome}" itemValue="#{o}" />
@@ -154,17 +154,17 @@
 						<h:commandLink value="Voltar"
 							immediate="true" 
 							action="#{issueBean.voltar}" >
-							<f:ajax execute="@form" render="@form :mensagens" />
+							<f:ajax execute="@form" render="@form" />
 						</h:commandLink> &#160;
 						<h:commandButton value="Inserir" 
 							action="#{issueBean.adiciona}"
 							rendered="#{issueBean.adicionando}">
-							<f:ajax execute="@form" render="@form :mensagens" />
+							<p:ajax process="@form" update="@form" />
 						</h:commandButton>
 						<h:commandButton value="Alterar" 
 							action="#{issueBean.altera}"
 							rendered="#{issueBean.editando}">
-							<f:ajax execute="@form" render="@form :mensagens" />
+							<p:ajax process="@form" update="@form" />
 						</h:commandButton>
 					</div>
 				</t:div>
