@@ -86,6 +86,16 @@ public class UsuarioBean {
 		lista();
 	}
 	
+	public boolean isAdicionando() {
+		return ESTADO_DE_NOVO.equals(state);
+	}
+	public boolean isEditando() {
+		return ESTADO_DE_EDICAO.equals(state);
+	}
+	public boolean isPesquisando() {
+		return ESTADO_DE_PESQUISA.equals(state);
+	}
+	
 	public List<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -116,30 +126,11 @@ public class UsuarioBean {
 	public void setState(String state) {
 		this.state = state;
 	}
-
 	public UIForm getForm() {
 		return form;
 	}
-
 	public void setForm(UIForm form) {
 		this.form = form;
 	}
 	
-	public boolean isAdicionando() {
-		return ESTADO_DE_NOVO.equals(state);
-	}
-	
-	public boolean isEditando() {
-		return ESTADO_DE_EDICAO.equals(state);
-	}
-	
-	public boolean isPesquisando() {
-		return ESTADO_DE_PESQUISA.equals(state);
-	}
-	
 }
-
-
-
-
-

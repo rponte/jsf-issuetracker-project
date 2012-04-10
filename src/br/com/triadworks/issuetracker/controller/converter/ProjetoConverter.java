@@ -19,9 +19,10 @@ public class ProjetoConverter implements Converter {
 		
 		Long id = new Long(value);
 		
-		ProjetoDao dao = ctx.getApplication().evaluateExpressionGet(ctx, "#{projetoDao}", ProjetoDao.class);
-		Projeto projeto = dao.carrega(id);
+		ProjetoDao dao = ctx.getApplication()
+				.evaluateExpressionGet(ctx, "#{projetoDao}", ProjetoDao.class);
 		
+		Projeto projeto = dao.carrega(id);
 		return projeto;
 	}
 
