@@ -133,7 +133,7 @@ public class Issue implements Serializable {
 	/**
 	 * Adiciona comentários à issue.
 	 */
-	public void adicionaComentario(Comentario comentario) {
+	public void comenta(Comentario comentario) {
 		
 		if (comentario.getAutor() == null)
 			throw new IllegalArgumentException("Autor nao pode ser vazio.");
@@ -145,7 +145,11 @@ public class Issue implements Serializable {
 	 */
 	public void fecha(Comentario comentario) {
 		this.status = Status.FECHADA;
-		this.adicionaComentario(comentario);
+		this.comenta(comentario);
+	}
+	
+	public boolean isFechada() {
+		return Status.FECHADA.equals(status);
 	}
 	
 	@PrePersist

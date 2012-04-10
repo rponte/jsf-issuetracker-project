@@ -2,6 +2,7 @@ package br.com.triadworks.issuetracker.dao;
 
 import java.util.List;
 
+import br.com.triadworks.issuetracker.model.Comentario;
 import br.com.triadworks.issuetracker.model.Issue;
 
 public interface IssueDao {
@@ -17,5 +18,9 @@ public interface IssueDao {
 	public Issue carrega(Long id);
 
 	public List<Issue> getIssuesDoUsuario(Long id);
+
+	public void comenta(Long id, Comentario comentario);
+
+	public void fecha(Long id, Comentario comentario);
 	
 }

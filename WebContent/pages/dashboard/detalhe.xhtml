@@ -5,19 +5,88 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:p="http://primefaces.org/ui"
 	template="/pages/template/template_padrao.xhtml">
 	
 	<ui:define name="conteudo">
 
+		<!-- Maneira Simples -->
+		<!-- Sem a utilização de um converter e facilidades do componente f:viewParam -->
+		<!-- 
 		<f:metadata>
-	        <f:viewParam name="id" value="#{dashboardBean.id}" />
-	        <f:event type="preRenderView" listener="#{dashboardBean.init}" />
-	    </f:metadata>	
+	        <f:viewParam name="id" value="#{detalheDaIssueBean.id}" />
+	        <f:event type="preRenderView" listener="#{detalheDaIssueBean.init}" />
+	    </f:metadata>
+	     -->	
+		
+		<f:metadata>
+			<!-- Atente para gambis no atributo required. #jsfsucks -->
+	        <f:viewParam name="id" value="#{detalheDaIssueBean.issue}"
+				converterMessage="Issue não encontrada."
+				required="#{detalheDaIssueBean.issue == null}" 
+				requiredMessage="ID da issue inválida, por favor use um link de dentro do sistema." />
+	    </f:metadata>
 	
-		<div id="container" align="left">
-			<h1>##{dashboardBean.issue.id} #{dashboardBean.issue.sumario}</h1>
-			Status: #{dashboardBean.issue.status}
-		</div>
+		<t:div id="container" style="text-align:left;">
+			<h1>
+				##{detalheDaIssueBean.issue.id} #{detalheDaIssueBean.issue.sumario} |
+				<span class="#{detalheDaIssueBean.issue.status}">#{detalheDaIssueBean.issue.status}</span>
+			</h1>
+			
+			<fieldset class="issue-descricao">
+				#{detalheDaIssueBean.issue.descricao}
+			</fieldset>
+			
+			<t:div id="comentarios">
+				<ui:repeat var="comentario" value="#{detalheDaIssueBean.issue.comentarios}">
+					<fieldset class="issue-comentario">
+						<legend>
+							#{comentario.autor.nome} comentou em 
+							<h:outputText value="#{comentario.criadaEm}">
+								<f:convertDateTime pattern="dd/MM/yyyy 'as' HH:mm" />
+							</h:outputText>
+						</legend>
+						#{comentario.descricao}
+					</fieldset>
+				</ui:repeat>
+			</t:div>
+			
+			<h:form id="form">
+				
+				<t:saveState value="#{detalheDaIssueBean.issue}" />
+			
+				<div>
+					<span>Comente nesta issue</span>
+					<span style="margin-left: 62%;">
+						<p:commandLink value="Salvar comentário"
+							process="@form" update="@form :comentarios"
+							disabled="#{detalheDaIssueBean.issue.fechada}"
+							action="#{detalheDaIssueBean.comentaIssue}">
+						</p:commandLink>
+					</span>
+					<p:inputTextarea
+						id="comentario" 
+						rows="6" required="true"
+						label="Comentário" style="width:96%;"
+						disabled="#{detalheDaIssueBean.issue.fechada}"
+						value="#{detalheDaIssueBean.comentario.descricao}">
+					</p:inputTextarea>
+				</div>
+				
+				<br clear="all" />
+				
+				<div align="right">
+					<h:link value="voltar ao Dashboard" outcome="dashboard" />  &#160;
+					<p:commandButton value="Fechar e Comentar" 
+						process="@form" update=":container"
+						action="#{detalheDaIssueBean.fechaIssue}"
+						disabled="#{detalheDaIssueBean.issue.fechada}">
+					</p:commandButton>
+				</div>
+				
+			</h:form>
+			
+		</t:div>
 	</ui:define>
 		
 </ui:composition>

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.triadworks.issuetracker.dao.IssueDao;
+import br.com.triadworks.issuetracker.model.Comentario;
 import br.com.triadworks.issuetracker.model.Issue;
 
 @Repository("issueDao")
@@ -57,4 +58,16 @@ public class IssueDaoImpl implements IssueDao {
 				.getResultList();
 	}
 
+	@Override
+	public void comenta(Long id, Comentario comentario) {
+		Issue issue = carrega(id);
+		issue.comenta(comentario); // thanks persistence context ;-)
+	}
+
+	@Override
+	public void fecha(Long id, Comentario comentario) {
+		Issue issue = carrega(id);
+		issue.fecha(comentario); // thanks persistence context ;-)
+	}
+	
 }

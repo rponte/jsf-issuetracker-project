@@ -4,6 +4,13 @@
 	width: 800px;
 }
 
+span.ABERTA {
+	color: lightgreen;
+}
+span.FECHADA {
+	color: red;
+}
+
 a {
 	color: navy;
 }
@@ -146,6 +153,24 @@ fieldset.confirma-senha {
 	background-color: #ddd;
 	margin-left: 0;
 	margin-bottom: 15px;
+}
+
+fieldset.issue-descricao {
+	background-color: #ddd;
+	margin-left: 0;
+	margin-bottom: 15px;
+	width: 95%;
+	border: 0;
+	color: gray;
+}
+fieldset.issue-comentario {
+	margin-left: 0;
+	margin-bottom: 15px;
+	width: 95%;
+	color: gray;
+}
+fieldset.issue-comentario legend {
+	color: black;
 }
 
 code *, pre * {
