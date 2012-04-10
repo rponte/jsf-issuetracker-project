@@ -12,8 +12,11 @@
 		<el-resolver>
 			org.springframework.web.jsf.el.SpringBeanFacesELResolver
 		</el-resolver>
+		<!-- Internacionalização -->
 		<resource-bundle>
-			<base-name>br.com.triadworks.issuetracker.resources.AppMessages</base-name>
+			<base-name>
+				br.com.triadworks.issuetracker.resources.AppMessages
+			</base-name>
 			<var>text</var>
 		</resource-bundle>
 		<message-bundle>
