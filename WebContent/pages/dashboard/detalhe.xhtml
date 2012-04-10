@@ -20,7 +20,8 @@
 	     -->	
 		
 		<f:metadata>
-			<!-- Atente para gambis no atributo required. #jsfsucks -->
+			<!-- Atente para gambis no atributo required. -->
+			<!-- Mais um bug http://java.net/jira/browse/JAVASERVERFACES-1532 #jsfsucks -->
 	        <f:viewParam name="id" value="#{detalheDaIssueBean.issue}"
 				converterMessage="Issue não encontrada."
 				required="#{detalheDaIssueBean.issue == null}" 
