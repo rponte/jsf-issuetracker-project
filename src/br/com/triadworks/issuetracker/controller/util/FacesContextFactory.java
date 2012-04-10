@@ -10,6 +10,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class FacesContextFactory {
 
+	/**
+	 * Obtem instancia atual do <code>facesContext</code> e permite que o mesmo
+	 * seja injetado em beans com escopo maior que request.
+	 */
 	@Bean
 	@Scope(value="request", proxyMode=ScopedProxyMode.TARGET_CLASS)
 	public FacesContext getInstance() {
