@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding='UTF-8' ?>
+<project name="Jsf-IssueTracker-Project" basedir="." default="all">
+	<property file="build.properties" />
+	
+	<path id="classpath">
+		<fileset dir="${lib.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<path id="webinf-classpath">
+		<fileset dir="${webroot.dir}/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+	
+	<path id="build-classpath">
+		<fileset dir="${lib.dir}/build">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${default.target.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${war.dir}" />
+	</target>
+	
+	<target name="compile" depends="clean">
+		<!-- Compila App classes -->
+		<copy todir="${classes.dir}">
+			<fileset dir="${source.dir}" excludes="**/*.java" />
+		</copy>
+		<javac destdir="${classes.dir}" srcdir="${source.dir}" debug="true" debuglevel="vars,lines,source"
+			source="1.6" target="1.6" encoding="UTF-8">
+			<classpath>
+				<path refid="webinf-classpath" />
+				<path refid="build-classpath" />
+			</classpath>
+		</javac>
+	</target>
+	
+	<target name="war" description="create war file" depends="compile">
+		<war destfile="${war.file}" webxml="${webroot.dir}/WEB-INF/web.xml" duplicate="fail">
+			<classes dir="${classes.dir}" />
+			<lib dir="${webroot.dir}/WEB-INF/lib"></lib>
+			<fileset dir="${webroot.dir}">
+				<include name="WEB-INF/faces-config.xml"/>
+				<include name="META-INF/**"/>
+				<include name="resources/**"/>
+				<include name="pages/**"/>
+				<include name="*.jsp" />
+				<include name="*.jspx" />
+				<include name="*.html" />
+				<include name="*.xhtml" />
+			</fileset>
+			<zipfileset dir="${webroot.dir}/WEB-INF/config" 
+				prefix="WEB-INF/config" excludes="**/*-test.xml" />
+		</war>
+	</target>
+	
+	<target name="all" depends="war">
+		<delete dir="${classes.dir}" />
+	</target>
+
+</project>
