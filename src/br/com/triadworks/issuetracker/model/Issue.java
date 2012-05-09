@@ -31,7 +31,7 @@ public class Issue implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ISSUE")
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="SEQ_ISSUE")
 	@SequenceGenerator(name="SEQ_ISSUE", sequenceName="SEQ_ISSUE", allocationSize=1)
 	private Long id;
 	
