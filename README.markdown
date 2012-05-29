@@ -3,7 +3,7 @@ JSF Issue Tracker Project
 
 Projeto simples de uma aplicação de Issue Tracker com `JSF 2.x`, `Spring 3.x` e `Hibernate 3.6.x`; O projeto é construído durante os cursos e treinamentos de **JSF 2, Spring e Hibernate** ministrado pela [TriadWorks](http://www.triadworks.com.br).
 
-Caso tenha interesse ou alguma dúvida nos nossos cursos e treinamentos, por favor, [deixe-nos saber](triadworks@triadworks.com.br).
+Caso tenha interesse ou alguma dúvida nos nossos cursos e treinamentos, por favor, [deixe-nos saber](http://www.triadworks.com.br/contatos.html).
 
 Configurando o projeto e banco de dados.
 ----------------------------------------
