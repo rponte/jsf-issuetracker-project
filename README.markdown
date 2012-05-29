@@ -32,7 +32,7 @@ Gerando .war da aplicação
 Informações adicionais
 ------------------------
 
-* O schema do banco de dados será criado pelo `Hibernate` ao iniciar a aplicação pela primeira vez;
+* O schema do banco de dados, `issuetracker`, será criado pelo `Hibernate` ao iniciar a aplicação pela primeira vez;
 * Dentro do diretório `/etc/lib` você encontra todas as libs e dependências organizadas de cada framework;
 * Dentro do diretório `/etc/lib/jdbc-drivers` é possível encontrar alguns drivers já disponíveis, como `MySQL`, `PostgreSQL` e `Oracle`;
 * Dentro do diretório `/etc/mockups` você encontra os mockups (esboços) das telas da aplicação;
