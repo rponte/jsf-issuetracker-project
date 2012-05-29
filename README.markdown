@@ -47,4 +47,4 @@ Mais informações
 - http://www.rponte.com.br
 
 **JSF Group**
-https://groups.google.com/group/javasf/
+- https://groups.google.com/group/javasf/
