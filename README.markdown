@@ -18,7 +18,7 @@ Os passos básicos são:
 4. Crie o banco de dados **issuetracker** com a ferramenta de sua preferência (como o PGAdmin, no caso do PostgreSQL);
 5. Faça o deploy no `Apache Tomcat 7.x` e inicie o servidor;
 6. Cadastre no banco de dados um novo usuário (tabela `USUARIO`) para que seja possível logar na aplicação;
-7. Acesse a aplicação através da url [http://localhost:8080/issuetracker] ;
+7. Acesse a aplicação através da url [http://localhost:8080/issuetracker](http://localhost:8080/issuetracker) ;
 8. Faça o login com o usuário criado;
 
 ** Dentro do diretório `/etc/lib/jdbc-drivers` é possível encontrar alguns drivers já disponíveis, como MySQL, PostgreSQL e Oracle;
