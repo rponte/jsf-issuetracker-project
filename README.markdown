@@ -1,7 +1,7 @@
 JSF Issue Tracker Project
 =========================
 
-Projeto simples de uma aplicação de Issue Tracker com `JSF 2.x`, `Spring 3.x` e `Hibernate 3.6.x`; O projeto é construído durante os cursos e treinamentos de **JSF 2, Spring e Hibernate** ministrados pela [TriadWorks](http://www.triadworks.com.br).
+Projeto simples de uma aplicação de Issue Tracker com `JSF 2.x`, `Spring 3.x` e `Hibernate 3.6.x`. O projeto é construído durante os cursos e treinamentos de **JSF 2, Spring e Hibernate** ministrados pela [TriadWorks](http://www.triadworks.com.br).
 
 Caso tenha interesse ou alguma dúvida nos nossos cursos e treinamentos, por favor, [deixe-nos saber](http://www.triadworks.com.br/contatos.html).
 
@@ -32,6 +32,7 @@ Gerando .war da aplicação
 Informações adicionais
 ------------------------
 
+* O schema do banco de dados será criado pelo `Hibernate` ao iniciar a aplicação pela primeira vez;
 * Dentro do diretório `/etc/lib` você encontra todas as libs e dependências organizadas de cada framework;
 * Dentro do diretório `/etc/lib/jdbc-drivers` é possível encontrar alguns drivers já disponíveis, como `MySQL`, `PostgreSQL` e `Oracle`;
 * Dentro do diretório `/etc/mockups` você encontra os mockups (esboços) das telas da aplicação;
