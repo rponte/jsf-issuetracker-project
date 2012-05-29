@@ -12,16 +12,16 @@ Por padrão o projeto está configurado para o banco de dados `PostgreSQL`, mas 
 
 Os passos básicos são:
 
-1. Importe o projeto no **Eclipse Java EE IDE for Web Developers (Indigo)** ou superior; 
-2. Adicione o JDBC driver no diretório `/WebContent/WEB-INF/lib`;
+1. Importe o projeto no [Eclipse Java EE IDE for Web Developers (Indigo)](http://www.eclipse.org/downloads/) ou superior; 
+2. Adicione o JDBC Driver no diretório `/WebContent/WEB-INF/lib` caso não pretenda utilizar o `PostgreSQL`;
 3. Configure as informações do banco no arquivo `src/jdbc.properties`;
-4. Crie o banco de dados **issuetracker** com a ferramenta de sua preferência (como o PGAdmin, no caso do PostgreSQL);
+4. Crie o banco de dados `issuetracker` com a ferramenta de sua preferência (como o `PGAdmin`, no caso do `PostgreSQL`);
 5. Faça o deploy no `Apache Tomcat 7.x` e inicie o servidor;
-6. Cadastre no banco de dados um novo usuário (tabela `USUARIO`) para que seja possível logar na aplicação;
+6. Insria um novo usuário (tabela `USUARIO`) no banco para que seja possível logar na aplicação;
 7. Acesse a aplicação através da url [http://localhost:8080/issuetracker](http://localhost:8080/issuetracker) ;
 8. Faça o login com o usuário criado;
 
-** Dentro do diretório `/etc/lib/jdbc-drivers` é possível encontrar alguns drivers já disponíveis, como MySQL, PostgreSQL e Oracle;
+** Dentro do diretório `/etc/lib/jdbc-drivers` é possível encontrar alguns drivers já disponíveis, como `MySQL`, `PostgreSQL` e `Oracle`;
 
 Gerando .war da aplicação
 ------------------------
