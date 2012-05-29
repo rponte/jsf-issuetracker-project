@@ -21,8 +21,6 @@ Os passos básicos são:
 7. Acesse a aplicação através da url [http://localhost:8080/issuetracker](http://localhost:8080/issuetracker) ;
 8. Faça o login com o usuário criado;
 
-** Dentro do diretório `/etc/lib/jdbc-drivers` é possível encontrar alguns drivers já disponíveis, como `MySQL`, `PostgreSQL` e `Oracle`;
-
 Gerando .war da aplicação
 ------------------------
 1. Para gerar o `.war` da aplicação basta executar o ant script (`build.xml`) no Eclipse ou na linha de comando:
@@ -30,6 +28,13 @@ Gerando .war da aplicação
 		$ ant
 
 2. Após ter executado o ant script o `.war` será gerado em `/target/war/snapshot/issuetracker.war`;
+
+Informações adicionais
+------------------------
+
+* Dentro do diretório `/etc/lib` você encontra todas as libs e dependências organizadas de cada framework;
+* Dentro do diretório `/etc/lib/jdbc-drivers` é possível encontrar alguns drivers já disponíveis, como `MySQL`, `PostgreSQL` e `Oracle`;
+* Dentro do diretório `/etc/mockups` você encontra os mockups (esboços) das telas da aplicação;
 
 Mais informações
 ----------------
