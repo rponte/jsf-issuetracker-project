@@ -41,3 +41,8 @@ Mais informações
 
 **TriadWorks**
 - http://www.triadworks.com.br
+- http://www.triadworks.com.br/servico.html
+**Rafael Ponte's Blog**
+- http://www.rponte.com.br
+**JSF Group**
+https://groups.google.com/group/javasf/
