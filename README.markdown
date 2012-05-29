@@ -1,14 +1,14 @@
 JSF Issue Tracker Project
 =========================
 
-- Projeto simples de uma Issue Tracker com `JSF 2.x`, `Spring 3.x` e `Hibernate 3.6.x`;
-- Projeto construído durante o curso de JSF 2, Spring e Hibernate na [TriadWorks](http://www.triadworks.com.br);
+- Projeto simples de uma aplicação de Issue Tracker com `JSF 2.x`, `Spring 3.x` e `Hibernate 3.6.x`;
+- Projeto construído durante o curso de **JSF 2, Spring e Hibernate** ministrado pela [TriadWorks](http://www.triadworks.com.br);
 - Como eu sou um péssimo Web designer, o design da aplicação foi copiado (e levemente modificado) do projeto [vraptor-blank-project](http://vraptor.caelum.com.br/en) da Caelum;
 
 Configurando o projeto e banco de dados.
 ----------------------------------------
 
-Por padrão o projeto está configurado para o banco de dados `PostgreSQL`, mas já que se trata de uma aplicação com Hibernate, você pode simplesmente configura-lo para trabalhar com qualquer outro banco.
+Por padrão o projeto está configurado para o banco de dados `PostgreSQL`, mas já que se trata de uma aplicação com `Hibernate`, você pode simplesmente configura-lo para trabalhar com qualquer outro banco.
 
 Os passos básicos são:
 
