@@ -3,7 +3,6 @@ JSF Issue Tracker Project
 
 - Projeto simples de uma aplicação de Issue Tracker com `JSF 2.x`, `Spring 3.x` e `Hibernate 3.6.x`;
 - Projeto construído durante o curso de **JSF 2, Spring e Hibernate** ministrado pela [TriadWorks](http://www.triadworks.com.br);
-- Como eu sou um péssimo Web designer, o design da aplicação foi copiado (e levemente modificado) do projeto [vraptor-blank-project](http://vraptor.caelum.com.br/en) da Caelum;
 
 Configurando o projeto e banco de dados.
 ----------------------------------------
@@ -35,6 +34,7 @@ Informações adicionais
 * Dentro do diretório `/etc/lib` você encontra todas as libs e dependências organizadas de cada framework;
 * Dentro do diretório `/etc/lib/jdbc-drivers` é possível encontrar alguns drivers já disponíveis, como `MySQL`, `PostgreSQL` e `Oracle`;
 * Dentro do diretório `/etc/mockups` você encontra os mockups (esboços) das telas da aplicação;
+* Como eu sou um péssimo Web designer, o design da aplicação foi copiado (e levemente modificado) do projeto [vraptor-blank-project](http://vraptor.caelum.com.br/en) da Caelum;
 
 Mais informações
 ----------------
